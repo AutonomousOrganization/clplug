@@ -46,13 +46,9 @@ Useful areas of research:
 - where new channel
 - why no donate
 
-##### nodeid: 0337694505123a12a8fadd95523dcc235898ad3b80a06e4a63ca26fed68dd0d17c
-
 ##### bitcoin addr: bc1q5xx9mathvsl0unfwa3jlph379n46vu9cletshr
 
 lightning only scales bitcoin if people run nodes
-
-- talldo 
 
 ```haskell  
 {-# LANGUAGE 
