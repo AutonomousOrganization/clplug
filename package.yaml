@@ -1,0 +1,118 @@
+name:                clplug 
+version:             0.1.0.0
+#github:              "AutonomousOrganization/clplug"
+license:             BSD3
+author:              "Taylor Singleton-Fookes"
+maintainer:          "taylorsingletonfookes@live.com"
+copyright:           "2023"
+category:            "bitcoin" 
+synopsis:            "Create Core Lightning Plugins"
+
+extra-source-files:
+- README.md
+- CHANGELOG.md
+
+description: Core Lightning Plugin
+
+dependencies:
+- base >= 4.7 && < 5
+- network 
+- conduit
+- aeson 
+- attoparsec
+- bytestring 
+- text 
+- mtl
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-export-lists
+- -Wmissing-home-modules
+- -Wpartial-fields
+- -Wredundant-constraints
+
+library:
+  source-dirs: src
+
+executables:
+  movelog: 
+    main: Main.hs
+    source-dirs: examples/movelog
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - clplug
+    - directory
+    - fmt 
+    - format-numbers
+    - time 
+  
+  wallet: 
+    main: Main.hs
+    source-dirs: examples/wallet
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - clplug 
+    - fmt 
+    - format-numbers
+
+  routes: 
+    main: Main.hs
+    source-dirs: examples/routes
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - clplug 
+    - fgl
+    - containers 
+    - lens-aeson
+    - lens
+
+###  storm: 
+###    main: Main.hs
+###    source-dirs: examples/storm
+###    ghc-options:
+###    - -threaded
+###    - -rtsopts
+###    - -with-rtsopts=-N
+###    dependencies:
+###    - clplug
+###    - fgl
+###    - aeson 
+###    - lens-aeson
+###    - lens
+###    - attoparsec
+###    - conduit 
+###    - network 
+###    - transformers 
+###    - mtl 
+###    - bytestring 
+###    - text 
+###    - composition-extra
+###    - format-numbers
+###    - containers
+###    - random
+###    - async 
+###    - stm 
+###
+tests:
+  clnplug-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - clplug
