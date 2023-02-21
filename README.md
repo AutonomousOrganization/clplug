@@ -1,7 +1,7 @@
 
 ## Core Lightning Plug
 
-Core lightning is a daemon ([lightningd](https://lightning.readthedocs.io/PLUGINS.html)) that operates payment channels that allow you to send and recieve bitcoin nearly instantly, with nearly zero fees with a high level of privacy. It does not compromise on any of the strengths of layer 1 bitcoin: no censorship, free speech, individual soveriegnty, and impossible debasement. In fact it strengthens bitcoin because it encourages the operation of fully validating nodes, lightningd requires bitcoind. Clplug is a Haskell library that allows you to easily create extensions (called plugins) that extend or augment its functionality. 
+Core lightning is a daemon ([lightningd](https://lightning.readthedocs.io/PLUGINS.html)) that operates payment channels that allow you to send and receive bitcoin nearly instantly, with nearly zero fees with a high level of privacy. It does not compromise on any of the strengths of layer 1 bitcoin: no censorship, free speech, individual sovereignty, and impossible debasement. In fact it strengthens bitcoin because it encourages the operation of fully validating nodes, lightningd requires bitcoind. Clplug is a Haskell library that allows you to easily create extensions (called plugins) that extend or augment its functionality. 
 
 To create a plugin you only need to define four things:
 - `plugin :: Manifest -> PluginInit -> PluginApp -> IO ()`
