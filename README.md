@@ -1,20 +1,20 @@
 
 ## Core Lightning Plug
 
-Extend [lightningd](https://lightning.readthedocs.io/PLUGINS.html).
+Core lightning is a daemon ([lightningd](https://lightning.readthedocs.io/PLUGINS.html)) that operates payment channels that allow you to send and recieve bitcoin nearly instantly, with nearly zero fees with a high level of privacy. It does not compromise on any of the strengths of layer 1 bitcoin: no censorship, free speech, individual soveriegnty, and impossible debasement. In fact it strengthens bitcoin because it encourages the operation of fully validating nodes, lightningd requires bitcoind. Clplug is a Haskell library that allows you to easily create extensions (called plugins) that extend or augment its functionality. 
 
-The `PluginMonad` contains
+To create a plugin you only need to define four things:
+- `plugin :: Manifest -> PluginInit -> PluginApp -> IO ()`
+- `Manifest :: Value` configuration`
+- `PluginInit :: PlugInfo -> IO a` return starting state
+- `PluginApp ::  (Maybe Id, Method, Params) -> PluginMonad`
+
+The `PluginMonad` contains a helpful set of transformers: 
 - `ask` (Handle,Init) handle to lightning-rpc
 - `get/put` polymorphic state
 - `yield` to respond
 
-You define
-- `plugin :: Manifest -> PluginInit -> PluginApp -> IO ()`
-- `Manifest :: Value` configuration
-- `PluginInit :: PlugInfo -> IO a` return starting state
-- `PluginApp ::  (Maybe Id, Method, Params) -> PluginMonad`
-
-Examples for (o)perators & (d)evelopers 
+Several examples are included that are intended to be useful examples for (d)evelopers and node (o)perators 
 - **movelog**
     - o - specify logfile= see fees earned and other coin movements
     - d - wherein a notification is subscribed, an option is added, and the state monad is used
