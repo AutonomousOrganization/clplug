@@ -24,6 +24,8 @@ Several examples are included that are intended to be useful examples for (d)eve
 - **routes** 
     - o - generate routes from bfs: `lightning-cli route` 
     - d - wherein fgl (functional graph library) is loaded and several rpc parameters are used
+
+Operators: the examples require option `allow-deprecated-apis=false`
     
 In progress: 
 - **tally** tallycoin connect
