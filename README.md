@@ -14,7 +14,7 @@ The `PluginMonad` contains a helpful set of transformers:
 - `get/put` polymorphic state
 - `yield` to respond
 
-Several examples are included that are intended to be useful examples for (d)evelopers and node (o)perators 
+Several examples are included that are intended to be useful for (d)evelopers and node (o)perators 
 - **movelog**
     - o - specify logfile= see fees earned and other coin movements
     - d - wherein a notification is subscribed, an option is added, and the state monad is used
