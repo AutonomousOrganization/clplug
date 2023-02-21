@@ -81,5 +81,3 @@ Useful areas of  exploration and research are:
 ##### Donation bitcoin addr: bc1q5xx9mathvsl0unfwa3jlph379n46vu9cletshr
 
 lightning only scales bitcoin if people run nodes
-
-- Taylor 
