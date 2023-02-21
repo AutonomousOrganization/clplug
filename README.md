@@ -30,31 +30,7 @@ Operators: the examples require option `allow-deprecated-apis=false`. To install
     - `stack build` 
     - move or symlink the created executable file into the lightning directory (by default: `.lightning/plugins`) 
     
-In progress: 
-- **tally** tallycoin connect
-- **balance** 
-- **deploy** 
-- **lud4** 
-- **hold**
-- 
-
-Library exports 
-- `Control.Plugin`
-- `Control.Client`
-- `Data.Lightning`
-
-Useful areas of research:
-- what fee set
-- what route use
-- when rebalance
-- why channel close
-- where new channel
-- why no donate
-
-##### bitcoin addr: bc1q5xx9mathvsl0unfwa3jlph379n46vu9cletshr
-
-lightning only scales bitcoin if people run nodes
-
+The main exports from the Library are `Control.Plugin`, `Control.Client`, and `Data.Lightning`. An upload and link to hackage is pending. This is a basic usage example: 
 ```haskell  
 {-# LANGUAGE 
       OverloadedStrings 
@@ -96,3 +72,14 @@ app (Nothing, "channel_opened", fromJSON -> Success (ChannelOpened {..})) = do
 appState = pure () 
 ```      
 
+Useful areas of  exploration and research are:
+- fee optimization
+- route selection
+- economic rebalancing
+- accidental channel closes
+
+##### Donation bitcoin addr: bc1q5xx9mathvsl0unfwa3jlph379n46vu9cletshr
+
+lightning only scales bitcoin if people run nodes
+
+- Taylor 
