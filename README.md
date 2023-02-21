@@ -25,7 +25,10 @@ Several examples are included that are intended to be useful examples for (d)eve
     - o - generate routes from bfs: `lightning-cli route` 
     - d - wherein fgl (functional graph library) is loaded and several rpc parameters are used
 
-Operators: the examples require option `allow-deprecated-apis=false`
+Operators: the examples require option `allow-deprecated-apis=false`. To install a plugin you must: 
+    - clone this repository
+    - `stack build` 
+    - move or symlink the created executable file into the lightning directory (by default: `.lightning/plugins`) 
     
 In progress: 
 - **tally** tallycoin connect
