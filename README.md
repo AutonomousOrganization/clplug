@@ -3,27 +3,26 @@
 
 Core lightning is a daemon ([lightningd](https://lightning.readthedocs.io/PLUGINS.html)) that operates payment channels that allow you to send and receive bitcoin nearly instantly, with nearly zero fees with a high level of privacy. It does not compromise on any of the strengths of layer 1 bitcoin: no censorship, free speech, individual sovereignty, and impossible debasement. In fact it strengthens bitcoin because it encourages the operation of fully validating nodes, lightningd requires bitcoind. Clplug is a Haskell library that allows you to easily create extensions (called plugins) that extend or augment its functionality. 
 
-To create a plugin you only need to define four things:
-- `plugin :: Manifest -> PluginInit -> PluginApp -> IO ()`
-- `Manifest :: Value` configuration`
-- `PluginInit :: PlugInfo -> IO a` return starting state
-- `PluginApp ::  (Maybe Id, Method, Params) -> PluginMonad`
+To create a plugin you only need to define three arguments:
+- `Manifest :: Value` - configuration of the interface with core lightning.
+- `PluginInit :: PlugInfo -> IO a` - startup function that returns the starting state
+- `PluginApp ::  (Maybe Id, Method, Params) -> PluginMonad` - data handler function
 
-The `PluginMonad` contains a helpful set of transformers: 
-- `ask` (Handle,Init) handle to lightning-rpc
-- `get/put` polymorphic state
-- `yield` to respond
+The transformer stack contains: 
+- `ask` - a handle to lightning-rpc and environment info.
+- `get/put` - polymorphic state
+- `yield` - stdout to core lightning
 
 Several examples are included that are intended to be useful for (d)evelopers and node (o)perators 
 - **movelog**
-    - o - specify logfile= see fees earned and other coin movements
-    - d - wherein a notification is subscribed, an option is added, and the state monad is used
+    - o - specify logfile= to create a log file with fees earned and other coin movements
+    - d - a notification is subscribed, an option is added, and the state monad is used
 - **wallet** 
     - o - show available totals and channel balances: `lightning-cli wallet`
-    - d - wherein a new rpc method is created
+    - d - a new rpc method is created
 - **routes** 
-    - o - generate routes from bfs: `lightning-cli route` 
-    - d - wherein fgl (functional graph library) is loaded and several rpc parameters are used
+    - o - generate routes: `lightning-cli route` 
+    - d - network graph is loaded and several rpc parameters are used
 
 Operators: the examples require option `allow-deprecated-apis=false`. To install a plugin you must: 
     - clone this repository

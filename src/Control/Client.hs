@@ -7,7 +7,6 @@
     #-}
 
 module Control.Client (
-    -- | Function to interface with lightning-rpc commands. First argument is a Handle to rpcfile from the readerT, second is a Command withholding Id which will automatically increment.  
     lightningCli,
     Command(..),
     PartialCommand
@@ -51,6 +50,7 @@ instance ToJSON Command where
                , "params" .= toJSON p
                ]
 
+-- | Function to interface with lightning-rpc commands. First argument is a Handle to rpcfile from the readerT, second is a Command withholding Id which will automatically increment.  
 lightningCli :: Handle -> PartialCommand -> IO (Maybe (Res Value))
 lightningCli h v = do 
     i <- atomicModifyIORef idref $ (\x -> (x,x)).(+1)

@@ -8,20 +8,13 @@
     #-}
 
 module Control.Plugin (
-    -- | Create main executable that can be installed as core lightning plugin. 
     plugin, 
-    -- | Helper function to allow node to continue. Hooks delay default node behaviour. 
     release, 
-    -- | Respond with arbitrary Value, custom rpc hooks will pass back through to terminal.
     respond, 
-    -- | Function called on every event subscribed to in the manifest.
     PluginApp, 
-    -- | Plugin stack contains ReaderT (ask - rpc handle & config), stateT (get/put - polymorphic state) and conduitT (yield - data exchange to core lightning.)
     PluginMonad,
-    -- | Function called on initialization, returned value is the initial state.
     PluginInit,
     PluginReq, 
-    -- | Handle connected to lightning-rpc file (use with Control.Client) & configuration object.  
     PlugInfo
     ) where 
 
@@ -42,17 +35,26 @@ import Control.Monad.Reader
 import Control.Concurrent hiding (yield) 
 import Network.Socket as N
 
+-- | Function called on every event subscribed to in the manifest.
 type PluginApp a = PluginReq -> PluginMonad a
+type PluginReq = (Maybe Id, Method, Params)
+
+-- | Plugin stack contains ReaderT (ask - rpc handle & config), stateT (get/put - polymorphic state) and conduitT (yield - data exchange to core lightning.)
 type PluginMonad a = ConduitT 
     (Either (Res Value) PluginReq) 
     (Res Value) 
     (ReaderT PlugInfo (StateT a IO))
     () 
-type PluginReq = (Maybe Id, Method, Params)
+
+-- | Handle connected to lightning-rpc file (use with Control.Client) & configuration object.  
 type PlugInfo = (Handle, Init)
+
+-- | Function called on initialization, returned value is the initial state.
 type PluginInit a = PlugInfo -> IO a
+
 data StartErr = ExpectManifest | ExpectInit deriving (Show, Exception) 
 
+-- | Create main executable that can be installed as core lightning plugin. 
 plugin :: Value -> PluginInit s -> PluginApp s -> IO ()
 plugin manifest start app = do 
     liftIO $ mapM_ (`hSetBuffering` LineBuffering) [stdin,stdout] 
@@ -101,9 +103,11 @@ getrpc d = do
     N.connect soc $ SockAddrUnix $ unpack d
     socketToHandle soc ReadWriteMode
 
+-- | Helper function to allow node to continue. Hooks delay default node behaviour. 
 release :: Id -> PluginMonad a
 release = yield . Res continue
 
+-- | Respond with arbitrary Value, custom rpc hooks will pass back through to terminal.
 respond :: Value -> Id -> PluginMonad a
 respond = (yield .) . Res
 

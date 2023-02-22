@@ -7,10 +7,12 @@ cabal-version: 1.12
 name:           clplug
 version:        0.1.0.0
 synopsis:       Create Core Lightning Plugins
-description:    Core Lightning Plugin
-category:       bitcoin
+description:    Library to create plugins to extend the functionality of Core Lightning daemon.
+category:       bitcoin, lightning, plugin
+homepage:       https://github.com/AutonomousOrganization/clplug#readme
+bug-reports:    https://github.com/AutonomousOrganization/clplug/issues
 author:         Taylor Singleton-Fookes
-maintainer:     talldo@shaw.ca
+maintainer:     taylorsingletonfookes@live.com
 copyright:      2023
 license:        BSD3
 license-file:   LICENSE
@@ -18,6 +20,10 @@ build-type:     Simple
 extra-source-files:
     README.md
     CHANGELOG.md
+
+source-repository head
+  type: git
+  location: https://github.com/AutonomousOrganization/clplug
 
 library
   exposed-modules:
